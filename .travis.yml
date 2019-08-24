@@ -11,7 +11,7 @@ before_install:
     - firebase setup:emulators:firestore
 
 install:
-    - npm ci
+    - npm --prefix=./orm ci
 
 script:
     - npm --prefix=./orm run build
