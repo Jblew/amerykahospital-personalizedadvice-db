@@ -1,0 +1,77 @@
+{
+    "name": "amerykahospital-personalizedadvice-db",
+    "description": "AmerykaHospital PersonalizedAdvice: Entity repository implementations and security rules",
+    "version": "0.0.0-development",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build:cleanbefore": "rm -rf dist",
+        "build:lint": "tslint -c tslint.json -p tsconfig.lint.json",
+        "build:node": "tsc",
+        "build": "npm run build:cleanbefore && npm run build:node && npm run build:lint",
+        "prepare": "NODE_ENV=production npm run build",
+        "test": "find src -name '*.spec.test.ts' | TS_NODE_FILES=true TS_NODE_CACHE=false TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' xargs mocha -r ts-node/register --require source-map-support/register",
+        "do_verify": "find src -name '*.integration.test.ts' | TS_NODE_FILES=true TS_NODE_CACHE=false TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' xargs mocha -r ts-node/register --require source-map-support/register",
+        "verify": "firebase emulators:exec --only firestore --token=\"emulator-token\" \"npm run do_verify\"",
+        "lint-fix": "tslint --fix -c tslint.json -p tsconfig.lint.json",
+        "semantic-release": "semantic-release"
+    },
+    "dependencies": {
+        "firebase": "^6.3.5",
+        "firestore-roles": "^2.2.0",
+        "ow": "^0.13.2",
+        "uuid": "^3.3.2"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^8.1.0",
+        "@commitlint/config-conventional": "^8.1.0",
+        "@firebase/testing": "^0.11.10",
+        "@types/chai": "^4.2.0",
+        "@types/chai-as-promised": "^7.1.2",
+        "@types/mocha": "^5.2.7",
+        "@types/uuid": "^3.4.5",
+        "chai": "^4.2.0",
+        "chai-as-promised": "^7.1.1",
+        "husky": "^3.0.3",
+        "jblew-tslint-config": "^0.1.0",
+        "mocha": "^6.2.0",
+        "semantic-release": "^15.13.19",
+        "ts-node": "^8.3.0",
+        "tslint": "^5.12.0",
+        "typescript": "^3.5.3"
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ],
+        "rules": {
+            "header-max-length": [
+                0
+            ],
+            "scope-case": [
+                0
+            ]
+        }
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "release": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Jblew/amerykahospital-personalizedadvice-db"
+    },
+    "keywords": [
+        "healthcare"
+    ],
+    "author": "Jędrzej Lewandowski <jedrzejblew@gmail.com> (https://jedrzej.lewandowski.doctor/)",
+    "contributors": [
+        "Jędrzej Lewandowski <jedrzejblew@gmail.com> (https://jedrzej.lewandowski.doctor/)"
+    ],
+    "license": "GPL-3.0-OR-LATER",
+    "bugs": {
+        "url": "https://github.com/jblew/amerykahospital-personalizedadvice-db/issues"
+    }
+}
