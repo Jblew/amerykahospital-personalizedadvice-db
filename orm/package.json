@@ -2,8 +2,12 @@
     "name": "amerykahospital-personalizedadvice-db",
     "description": "AmerykaHospital PersonalizedAdvice: Entity repository implementations and security rules",
     "version": "0.0.0-development",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/orm/src/index.js",
+    "types": "dist/orm/src/index.d.ts",
+    "files": [
+        "dist/",
+        "package-lock.json"
+    ],
     "scripts": {
         "build:cleanbefore": "rm -rf dist",
         "build:lint": "tslint -c tslint.json -p tsconfig.lint.json",
@@ -17,6 +21,7 @@
         "semantic-release": "semantic-release"
     },
     "dependencies": {
+        "amerykahospital-personalizedadvice-businesslogic": "^1.3.0",
         "firebase": "^6.3.5",
         "firestore-roles": "^2.2.0",
         "ow": "^0.13.2",
