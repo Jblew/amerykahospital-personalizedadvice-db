@@ -1,7 +1,7 @@
 import { Advice, AdviceRepository } from "amerykahospital-personalizedadvice-businesslogic";
 import firebase from "firebase/app";
 
-import { FirestoreCollectionKeys } from "../../../../FirestoreCollectionKeys";
+import { FirestoreCollectionKeys } from "../../config/FirestoreCollectionKeys";
 import { FirestoreEquivalent } from "../../types/FirestoreEquivalent";
 
 export class AdviceRepositoryImpl implements AdviceRepository {

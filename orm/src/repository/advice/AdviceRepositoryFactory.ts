@@ -2,7 +2,7 @@ import { AdviceRepository } from "amerykahospital-personalizedadvice-businesslog
 
 import { FirestoreEquivalent } from "../../types/FirestoreEquivalent";
 
-import { AdviceRepositoryImpl } from "./AdviceRepository";
+import { AdviceRepositoryImpl } from "./AdviceRepositoryImpl";
 
 export namespace AdviceRepositoryFactory {
     export function make(firestore: FirestoreEquivalent): AdviceRepository {
