@@ -4,18 +4,15 @@
         "check": "if echo \"$(node --version)\" | grep -q \"$(cat .nvmrc)\"; then echo \"Node version correct\"; else echo \"Node version does not match that in .nvmrc\" && exit 1; fi",
         "build:lint": "tslint -c tslint.json -p tsconfig.json",
         "build": "npm run check && npm run build:lint",
-        "build-with-orm": "npm --prefix=../orm run build && npm run build",
         "do_test": "find src -name '*.spec.test.ts' | TS_NODE_FILES=true TS_NODE_CACHE=false TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' xargs mocha -r ts-node/register --require source-map-support/register",
         "test": "firebase emulators:exec --only firestore --token=\"test_token\" \"npm run do_test\"",
         "lint-fix": "tslint --fix -c tslint.json -p tsconfig.json",
-        "gen-rules": "npx firestore-roles generate node_modules/amerykahospital-personalizedadvice-core/dist/roles/roles.config.js inner.firestore.rules deploy.firestore.rules"
+        "gen-rules": "npx firestore-roles generate node_modules/amerykahospital-personalizedadvice-core/dist/roles/roles.config.js project.firestore.template.rules | ts-node src/process-rules-template.ts > deploy.firestore.rules"
     },
     "engines": {
         "node": "8"
     },
-    "dependencies": {
-        "orm": "../orm"
-    },
+    "dependencies": {},
     "devDependencies": {
         "@firebase/testing": "^0.11.10",
         "@types/bluebird": "^3.5.27",

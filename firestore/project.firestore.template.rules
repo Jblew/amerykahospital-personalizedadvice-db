@@ -1,6 +1,6 @@
 
 function userIsMedicalProfessional() {
-  return isAuthenticated() && callerHasRole("medicalprofessional");
+  return isAuthenticated() && callerHasRole("§role_medicalprofessional§");
 }
 
 function adviceIsPendingAndUserIsLoggedIn() {
@@ -11,7 +11,7 @@ function adviceBelongsToUser() {
   return request.auth != null && ('uid' in resource.data.keys()) && resource.data.uid == request.auth.uid;
 }
 
-match /ahpaa_advices/{adviceId} {
+match /§collection_advice§/{adviceId} {
   allow get: if userIsMedicalProfessional() || adviceIsPendingAndUserIsLoggedIn() || adviceBelongsToUser();
   allow list: if userIsMedicalProfessional() || adviceBelongsToUser();
   allow create: if userIsMedicalProfessional();
@@ -19,7 +19,7 @@ match /ahpaa_advices/{adviceId} {
 }
 
 // demo
-match /ahpaa_advices_demo/{adviceId} {
+match /§collection_advice_demo§/{adviceId} {
   allow read;
   allow write: if false;
 }
