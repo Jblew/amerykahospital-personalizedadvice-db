@@ -19,3 +19,5 @@ export const RolesConfig: FirestoreRolesConfiguration = Object.freeze({
         },
     },
 });
+
+export default RolesConfig;
