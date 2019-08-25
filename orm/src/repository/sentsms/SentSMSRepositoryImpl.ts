@@ -1,7 +1,7 @@
 import { PendingSentSMS, SentSMS, SentSMSRepository } from "amerykahospital-personalizedadvice-businesslogic";
 import uuid from "uuid/v4";
 
-import { FirestoreCollectionKeys } from "../../../../FirestoreCollectionKeys";
+import { FirestoreCollectionKeys } from "../../config/FirestoreCollectionKeys";
 import { FirestoreEquivalent } from "../../types/FirestoreEquivalent";
 
 export class SentSMSRepositoryImpl implements SentSMSRepository {

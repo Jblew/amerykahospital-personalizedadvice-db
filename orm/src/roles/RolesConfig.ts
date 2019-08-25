@@ -1,7 +1,7 @@
 import { RoleKey } from "amerykahospital-personalizedadvice-businesslogic";
 import { FirestoreRolesConfiguration } from "firestore-roles";
 
-import { FirestoreCollectionKeys } from "../../../FirestoreCollectionKeys";
+import { FirestoreCollectionKeys } from "../config/FirestoreCollectionKeys";
 
 export const RolesConfig: FirestoreRolesConfiguration = Object.freeze({
     accountsCollection: FirestoreCollectionKeys.ACCOUNTS_COLLECTION_KEY,
