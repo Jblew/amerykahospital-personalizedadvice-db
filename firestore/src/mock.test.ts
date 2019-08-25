@@ -1,9 +1,10 @@
 import * as firebase from "@firebase/testing";
-import { Advice, RoleKey, RolesConfig } from "amerykahospital-personalizedadvice-core";
 import FirestoreRoles from "firestore-roles";
 import * as fs from "fs";
 import * as path from "path";
-import * as uuid from "uuid/v4";
+import uuid from "uuid/v4";
+
+import { Advice, RoleKey, RolesConfig } from "./context";
 
 const firestoreRules = fs.readFileSync(path.resolve(__dirname, "../deploy.firestore.rules"), "utf8");
 

@@ -1,12 +1,12 @@
 /* tslint:disable:max-classes-per-file no-console */
 import * as firebase from "@firebase/testing";
-import { Advice, FirestoreCollections } from "amerykahospital-personalizedadvice-core";
 import { expect, use as chaiUse } from "chai";
-import * as chaiAsPromised from "chai-as-promised";
+import chaiAsPromised from "chai-as-promised";
 import * as _ from "lodash";
 import "mocha";
-import * as uuid from "uuid/v4";
+import uuid from "uuid/v4";
 
+import { Advice, FirestoreCollectionKeys } from "./context";
 import { mock, sampleAdvice } from "./mock.test";
 
 chaiUse(chaiAsPromised);
@@ -22,8 +22,8 @@ describe("Firestore rules", function() {
         }
     });
 
-    describe("Collection " + FirestoreCollections.ADVICES_COLLECTION_KEY, () => {
-        const collName = FirestoreCollections.ADVICES_COLLECTION_KEY;
+    describe("Collection " + FirestoreCollectionKeys.ADVICES_COLLECTION_KEY, () => {
+        const collName = FirestoreCollectionKeys.ADVICES_COLLECTION_KEY;
         describe("get", () => {
             it("Is not allowed when user is not authenticated", async () => {
                 const { adminDoc, clientDoc } = await mock({ clientAuth: undefined });

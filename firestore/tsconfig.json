@@ -1,14 +1,6 @@
 {
+    "extends": "../orm/tsconfig.json",
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
-        "strict": true,
-        "declaration": true,
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": false,
-        "noImplicitAny": true,
-        "allowJs": false,
-        "sourceMap": true,
         "outDir": "dist",
         "baseUrl": "src/",
         "paths": {

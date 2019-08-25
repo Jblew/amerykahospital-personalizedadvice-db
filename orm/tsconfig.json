@@ -24,8 +24,7 @@
     ],
     "exclude": [
         "src/**/*.test.ts",
-        "**/_test/**/*",
-        "src/context_for_rules.ts"
+        "**/_test/**/*"
     ],
     "references": []
 }

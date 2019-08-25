@@ -1,7 +1,7 @@
 // tslint:disable no-console
 import * as fs from "fs";
 
-import { FirestoreCollectionKeys, RoleKey } from "../../orm/src/context_for_rules";
+import { FirestoreCollectionKeys, RoleKey } from "./context";
 /**
  *
  * Variables
