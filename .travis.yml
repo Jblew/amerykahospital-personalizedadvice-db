@@ -12,6 +12,7 @@ before_install:
 
 install:
     - npm --prefix=./orm ci
+    - npm --prefix=./firestore ci
 
 script:
     - npm --prefix=./orm run build
