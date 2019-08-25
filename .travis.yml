@@ -20,7 +20,7 @@ script:
 
 deploy:
     - provider: script
-      script: bash orm/stripts/release.sh
+      script: bash orm/scripts/release.sh
       skip_cleanup: true
       node_js: 10
       on:
