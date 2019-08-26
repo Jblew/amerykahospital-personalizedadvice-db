@@ -8,12 +8,11 @@ branches:
 before_install:
     - npm i -g npm
     - npm i -g firebase firebase-tools
-    - if [[ $TRAVIS_BRANCH == "production" ]]; then
-        firebase use production
-        echo "Using production environment"
+    - |
+      if [[ $TRAVIS_BRANCH == "production" ]]; then
+        firebase use production && echo "Using production environment"
       else
-        firebase use preprod
-        echo "Using preprod environment"
+        firebase use preprod && echo "Using preprod environment"
       fi
     - firebase setup:emulators:firestore
 
