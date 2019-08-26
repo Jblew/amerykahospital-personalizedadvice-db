@@ -2,8 +2,8 @@
     "name": "amerykahospital-personalizedadvice-db",
     "description": "AmerykaHospital PersonalizedAdvice: Entity repository implementations and security rules",
     "version": "0.0.0-development",
-    "main": "dist/orm/src/index.js",
-    "types": "dist/orm/src/index.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "files": [
         "dist/",
         "package-lock.json"
