@@ -10,7 +10,7 @@ import * as path from "path";
 
 import { IntegrationTestsEnvironment } from "../../_test/IntegrationTestsEnvironment";
 import { _, BluebirdPromise, expect, sinon, uuid } from "../../_test/test_environment";
-import { RealtimeDBKeys } from "../../config/RealtimeDbKeys";
+import { RealtimeDBKeys } from "../../config/RealtimeDBKeys";
 
 import { ChatRepositoryFactory } from "./ChatRepositoryFactory";
 describe("ChatRepositoryImpl", function() {

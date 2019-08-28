@@ -9,7 +9,7 @@ import {
 import * as _ from "lodash";
 import uuid from "uuid/v4";
 
-import { RealtimeDBKeys } from "../../config/RealtimeDbKeys";
+import { RealtimeDBKeys } from "../../config/RealtimeDBKeys";
 import { RealtimeDbEquivalent } from "../../types/RealtimeDbEquivalent";
 
 export class ChatRepositoryImpl extends AbstractChatRepository implements ChatRepository {
