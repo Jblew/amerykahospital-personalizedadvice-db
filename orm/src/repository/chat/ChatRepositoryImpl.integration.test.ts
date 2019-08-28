@@ -11,9 +11,8 @@ import { _, BluebirdPromise, expect, sinon, uuid } from "../../_test/test_enviro
 import { RealtimeDBKeys } from "../../config/RealtimeDbKeys";
 
 import { ChatRepositoryFactory } from "./ChatRepositoryFactory";
-import { ChatRepositoryImpl } from "./ChatRepositoryImpl";
 
-describe.only("ChatRepositoryImpl", function() {
+describe("ChatRepositoryImpl", function() {
     const env = new IntegrationTestsEnvironment();
     let repository: ChatRepository;
     beforeEach(async () => await env.prepareEach());
@@ -188,4 +187,50 @@ describe.only("ChatRepositoryImpl", function() {
             );
         });
     });
+
+    [
+        {
+            methodName: "listenForMessagesToChannel",
+            selectorName: "channel",
+            listenerFn: (selector: string, cb: ChatRepository.MessageCallback) =>
+                repository.listenForMessagesToChannel(selector, cb),
+            adderFn: (selector: string) =>
+                repository.addMessage(sampleAccount(), sampleMessage({ toChannel: selector })),
+        },
+        {
+            methodName: "listenForMessagesToUid",
+            selectorName: "uid",
+            listenerFn: (selector: string, cb: ChatRepository.MessageCallback) =>
+                repository.listenForMessagesToUid(selector, cb),
+            adderFn: (selector: string) => repository.addMessage(sampleAccount(), sampleMessage({ toUid: selector })),
+        },
+    ].forEach(test =>
+        describe(test.methodName, function() {
+            const selector = `sel-${uuid()}`;
+
+            async function obscure() {
+                await repository.addMessage(sampleAccount(), sampleMessage({ toUid: uuid() }));
+                await repository.addMessage(sampleAccount(), sampleMessage({ toUid: uuid() }));
+                await repository.addMessage(sampleAccount(), sampleMessage({ toChannel: uuid() }));
+                await repository.addMessage(sampleAccount(), sampleMessage({ toChannel: uuid() }));
+            }
+
+            it(
+                `Callback is fired only when message is added to the ${test.selectorName} ` +
+                    `and only until cancel is called`,
+                async () => {
+                    const cb = sinon.spy();
+                    const { cancel } = test.listenerFn(selector, cb);
+                    obscure();
+                    const n = 3;
+                    _.times(n, () => test.adderFn(selector));
+
+                    expect(cb.callCount).to.be.equal(n);
+                    cancel();
+                    _.times(n, () => test.adderFn(selector));
+                    expect(cb.callCount).to.be.equal(n);
+                },
+            );
+        }),
+    );
 });
