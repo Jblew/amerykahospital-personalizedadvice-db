@@ -101,4 +101,50 @@ describe.only("ChatRepositoryImpl", function() {
         });
     });
 
+    ["listToChannel", "listToUid"].forEach(test =>
+        describe(test, function() {
+            const channelA = `chan-${uuid()}`;
+            const channelB = `chan-${uuid()}`;
+            const account = sampleAccount();
+            const uidA = `uid-${uuid()}`;
+            const uidB = `uid-${uuid()}`;
+            const msgsToChannelA = _.range(0, 10).map(i => sampleMessage({ toChannel: channelA }));
+            const msgsToChannelB = _.range(0, 10).map(i => sampleMessage({ toChannel: channelB }));
+            const msgsToUidA = _.range(0, 10).map(i => sampleMessage({ toUid: uidA }));
+            const msgsToUidB = _.range(0, 10).map(i => sampleMessage({ toUid: uidB }));
+
+            beforeEach(async () => {
+                for (const msg of [...msgsToChannelA, ...msgsToChannelB, ...msgsToUidA, ...msgsToUidB]) {
+                    const added = await repository.addMessage(account, msg);
+                    await BluebirdPromise.delay(10);
+                }
+            });
+
+            let recvMsgs: ChatMessage[] = [];
+            beforeEach(async () => {
+                if (test === "listToChannel") {
+                    recvMsgs = await repository.listToChannel(channelA);
+                } else {
+                    recvMsgs = await repository.listToUid(uidA);
+                }
+            });
+
+            it("Lists only messages sent to this channel/uid", () => {
+                const expectedMsgs = test === "listToChannel" ? msgsToChannelA : msgsToUidA;
+
+                expect(recvMsgs.length).to.be.equal(expectedMsgs.length);
+                expect(recvMsgs.map(v => v.message)).to.have.members(expectedMsgs.map(v => v.message));
+            });
+
+            it("Sorts messages by timestamp", () => {
+                let prevTimestamp = Number.MAX_VALUE;
+
+                for (const msg of recvMsgs) {
+                    const currTimestamp = msg.timestampMs;
+                    expect(currTimestamp).to.be.lessThan(prevTimestamp);
+                    prevTimestamp = currTimestamp;
+                }
+            });
+        }),
+    );
 });
