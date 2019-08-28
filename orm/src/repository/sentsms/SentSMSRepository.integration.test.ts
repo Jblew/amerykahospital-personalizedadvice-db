@@ -6,6 +6,8 @@ import { expect, uuid } from "../../_test/test_environment";
 import { SentSMSRepositoryFactory } from "./SentSMSRepositoryFactory";
 
 describe("SentSMSRepository", function() {
+    this.timeout(6000);
+
     const env = new IntegrationTestsEnvironment();
     let repository: SentSMSRepository;
     beforeEach(async () => await env.prepareEach());
