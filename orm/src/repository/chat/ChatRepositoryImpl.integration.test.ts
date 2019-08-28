@@ -118,7 +118,7 @@ describe("ChatRepositoryImpl", function() {
 
             beforeEach(async () => {
                 for (const msg of [...msgsToChannelA, ...msgsToChannelB, ...msgsToUidA, ...msgsToUidB]) {
-                    const added = await repository.addMessage(account, msg);
+                    await repository.addMessage(account, msg);
                     await BluebirdPromise.delay(10);
                 }
             });
