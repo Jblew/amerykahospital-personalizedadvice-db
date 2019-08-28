@@ -38,6 +38,7 @@
       }
     },
     "chatusers": {
+      ".read": "auth != null",
       "$uid": {
         ".indexOn": ["role"],
         ".read": "auth != null",
