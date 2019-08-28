@@ -5,17 +5,21 @@ import {
     ChatUser,
     PendingChatMessage,
 } from "amerykahospital-personalizedadvice-businesslogic";
+import * as fs from "fs";
+import * as path from "path";
 
 import { IntegrationTestsEnvironment } from "../../_test/IntegrationTestsEnvironment";
 import { _, BluebirdPromise, expect, sinon, uuid } from "../../_test/test_environment";
 import { RealtimeDBKeys } from "../../config/RealtimeDbKeys";
 
 import { ChatRepositoryFactory } from "./ChatRepositoryFactory";
-
 describe("ChatRepositoryImpl", function() {
     const env = new IntegrationTestsEnvironment();
+    const rules = fs.readFileSync(path.resolve(__dirname, "../../../../realtimedb/database.rules.json"), "UTF-8");
+    env.setDatabaseRules(rules);
+
     let repository: ChatRepository;
-    beforeEach(async () => await env.prepareEach());
+    beforeEach(async () => await env.prepareEach({ admin: true }));
     beforeEach(() => {
         repository = ChatRepositoryFactory.make(env.database);
     });

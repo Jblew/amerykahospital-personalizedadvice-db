@@ -1,0 +1,49 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "chatmsgs": {
+      "$selector": {
+        ".indexOn": ["timestampMs"],
+        ".read": "auth != null",
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['fromName', 'fromUid', 'message', 'timestampMs', 'id'])",
+        "$other": {
+          ".validate": false
+        },
+        "fromName": {
+          ".validate": "newData.isString()"
+        },
+        "fromUid": {
+          ".validate": "newData.isString() && newData.val() == auth.uid"
+        },
+        "message": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 800"
+        },
+        "timestampMs": {
+          ".validate": "newData.isNumber() || newData.val() <= now"
+        },
+        "id": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "toChannel": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "toUid": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        }
+      }
+    },
+    "chatusers": {
+      "$uid": {
+        ".indexOn": ["role"],
+        ".read": "auth != null",
+        ".write": "$uid === auth.uid",
+        ".validate": "newData.hasChildren(['id', 'uid', 'displayName', 'lastSeenTimestampMs'])",
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}

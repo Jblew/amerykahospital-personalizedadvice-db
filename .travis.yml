@@ -29,7 +29,7 @@ script:
 
 deploy:
     - provider: script
-      script: bash orm/scripts/release.sh && bash -c "npx firebase deploy --only firestore"
+      script: bash orm/scripts/release.sh && bash -c "npx firebase deploy --only firestore,database"
       skip_cleanup: true
       node_js: 10
       on:
