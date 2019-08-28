@@ -3,13 +3,15 @@ import * as firebaseTesting from "@firebase/testing";
 
 export class IntegrationTestsEnvironment {
     public firestore!: firebaseTesting.firestore.Firestore;
+    public database!: firebaseTesting.database.Database;
 
     public prepareEach() {
         const adminApp = firebaseTesting.initializeAdminApp({
             projectId: "unit-testing-" + Date.now(),
-            databaseName: "db",
+            databaseName: "db-" + Date.now(),
         });
         this.firestore = adminApp.firestore();
+        this.database = adminApp.database();
     }
 
     public async cleanupEach() {
