@@ -147,4 +147,45 @@ describe.only("ChatRepositoryImpl", function() {
             });
         }),
     );
+
+    describe("listUsersWithRole", function() {
+        const accountsAndRoles = [
+            {
+                role: ChatUser.Role.MEDICALPROFESSIONAL,
+                account: sampleAccount(),
+            },
+            {
+                role: ChatUser.Role.MEDICALPROFESSIONAL,
+                account: sampleAccount(),
+            },
+            {
+                role: ChatUser.Role.SERVICE,
+                account: sampleAccount(),
+            },
+            {
+                role: undefined,
+                account: sampleAccount(),
+            },
+        ];
+
+        beforeEach(async () => {
+            for (const accountRolePair of accountsAndRoles) {
+                if (accountRolePair.role) {
+                    await repository.setUserRole(accountRolePair.account, accountRolePair.role as ChatUser.Role.Type);
+                } else {
+                    // this is the only way to create user with undefined role
+                    await repository.addMessage(accountRolePair.account, sampleMessage({ toChannel: "a" }));
+                }
+            }
+        });
+
+        it("Lists only users that do have a role", async () => {
+            const role = ChatUser.Role.MEDICALPROFESSIONAL;
+            const recvUsers = await repository.listUsersWithRole(role);
+            expect(recvUsers.length).to.be.equal(2);
+            expect(recvUsers.map(u => u.uid)).to.have.members(
+                [accountsAndRoles[0], accountsAndRoles[1]].map(ar => ar.account.uid),
+            );
+        });
+    });
 });
