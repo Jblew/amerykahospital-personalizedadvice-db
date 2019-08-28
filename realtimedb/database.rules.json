@@ -4,6 +4,7 @@
     ".write": false,
     "chatmsgs": {
       "$selector": {
+        ".read": "auth != null",
         "$messageId": {
           ".indexOn": ["timestampMs"],
           ".read": "auth != null",
