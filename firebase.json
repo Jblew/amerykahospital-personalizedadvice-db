@@ -3,6 +3,9 @@
     "rules": "firestore/deploy.firestore.rules",
     "indexes": "firestore/firestore.indexes"
   },
+  "database": {
+
+  },
   "emulators": {
     "firestore": {
       "port": "8081"
