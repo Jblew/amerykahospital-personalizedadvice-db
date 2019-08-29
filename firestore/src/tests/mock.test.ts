@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as path from "path";
 import uuid from "uuid/v4";
 
-import { Advice, RoleKey, RolesConfig } from "../context";
+import { Advice, RoleKey, RolesConfig, PendingMedicalProfessional } from "../context";
 
 const firestoreRules = fs.readFileSync(path.resolve(__dirname, "../deploy.firestore.rules"), "utf8");
 
@@ -35,8 +35,8 @@ export async function mock(o: { clientAuth?: {} }) {
 
     const adminRoles = new FirestoreRoles(RolesConfig, adminFirestore);
 
-    async function markAsMedicalProfessional(uid: string) {
-        return adminRoles.enableRole(uid, RoleKey.medicalprofessional);
+    async function enableRole(uid: string, role: string) {
+        return adminRoles.enableRole(uid, role);
     }
 
     return {
@@ -47,7 +47,7 @@ export async function mock(o: { clientAuth?: {} }) {
         adminFirestore,
         adminDoc,
         clientDoc,
-        markAsMedicalProfessional,
+        enableRole,
     };
 }
 

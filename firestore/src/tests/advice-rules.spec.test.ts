@@ -1,7 +1,5 @@
 /* tslint:disable:max-classes-per-file no-console */
-import * as firebase from "@firebase/testing";
-
-import { Advice, FirestoreCollectionKeys } from "../context";
+import { Advice, FirestoreCollectionKeys, RoleKey } from "../context";
 
 import { _, expect, uuid } from "./_testenv/test_environment";
 import { cleanupFirebase, mock, sampleAdvice } from "./mock.test";
@@ -78,13 +76,13 @@ describe("Firestore rules", function() {
                 const adviceForU1 = sampleAdvice(uid1);
                 const adviceForU2 = sampleAdvice(uid2);
                 const pendingAdvice = sampleAdvice();
-                const { adminDoc, clientFirestore, markAsMedicalProfessional } = await mock({
+                const { adminDoc, clientFirestore, enableRole } = await mock({
                     clientAuth: { uid: uid2 },
                 });
                 await adminDoc(collName, "adviceForU1").set(adviceForU1);
                 await adminDoc(collName, "adviceForU2").set(adviceForU2);
                 await adminDoc(collName, "pendingAdvice").set(pendingAdvice);
-                await markAsMedicalProfessional(uid2);
+                await enableRole(uid2, RoleKey.medicalprofessional);
 
                 const advices = (await clientFirestore.collection(collName).get()).docs.map(
                     doc => doc.data() as Advice,
@@ -145,8 +143,8 @@ describe("Firestore rules", function() {
 
             it("Is allowed when user is a medical professional", async () => {
                 const uid = `user${uuid()}`;
-                const { clientFirestore, markAsMedicalProfessional } = await mock({ clientAuth: { uid } });
-                await markAsMedicalProfessional(uid);
+                const { clientFirestore, enableRole } = await mock({ clientAuth: { uid } });
+                await enableRole(uid, RoleKey.medicalprofessional);
 
                 await expect(
                     clientFirestore
@@ -175,9 +173,9 @@ describe("Firestore rules", function() {
 
             it("Is allowed when user is a medical professional", async () => {
                 const uid = `user${uuid()}`;
-                const { adminDoc, clientDoc, markAsMedicalProfessional } = await mock({ clientAuth: { uid } });
+                const { adminDoc, clientDoc, enableRole } = await mock({ clientAuth: { uid } });
                 await adminDoc(collName, "doc").set({ da: "ta" });
-                await markAsMedicalProfessional(uid);
+                await enableRole(uid, RoleKey.medicalprofessional);
 
                 await expect(clientDoc(collName, "doc").set({ da: "ta2" })).to.eventually.be.fulfilled;
             });
