@@ -73,3 +73,9 @@ export function sampleAdvice(uid?: string) {
     if (uid) advice.uid = uid; // firebase catches the difference between undefined and nonexistent attr
     return advice;
 }
+
+export function sampleMedicalProfessional(): PendingMedicalProfessional {
+    return {
+        displayName: `displayname-${uuid()}`,
+    };
+}
