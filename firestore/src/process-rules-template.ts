@@ -9,8 +9,10 @@ import { FirestoreCollectionKeys, RoleKey } from "./context";
 
 const definedVariables: { [x: string]: string } = Object.freeze({
     role_medicalprofessional: RoleKey.medicalprofessional,
+    role_provisioner: RoleKey.provisioner,
     collection_advice: FirestoreCollectionKeys.ADVICES_COLLECTION_KEY,
     collection_advice_demo: FirestoreCollectionKeys.DEMO_ADVICES_COLLECTION_KEY,
+    collection_medicalprofessional: FirestoreCollectionKeys.MEDICALPROFESSIONAL_COLLECTION_KEY,
 });
 
 /**

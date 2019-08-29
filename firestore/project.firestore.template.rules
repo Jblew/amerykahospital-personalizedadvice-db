@@ -3,6 +3,10 @@ function userIsMedicalProfessional() {
   return isAuthenticated() && callerHasRole("§role_medicalprofessional§");
 }
 
+function userIsProvisioner() {
+  return isAuthenticated() && callerHasRole("§role_provisioner§");
+}
+
 function adviceIsPendingAndUserIsLoggedIn() {
   return request.auth != null && !('uid' in resource.data.keys());
 }
@@ -16,6 +20,11 @@ match /§collection_advice§/{adviceId} {
   allow list: if userIsMedicalProfessional() || adviceBelongsToUser();
   allow create: if userIsMedicalProfessional();
   allow update: if userIsMedicalProfessional() || adviceIsPendingAndUserIsLoggedIn();
+}
+
+match /§collection_medicalprofessional§/{mpId} {
+  allow read: if isAuthenticated();
+  allow write: if userIsProvisioner();
 }
 
 // demo
