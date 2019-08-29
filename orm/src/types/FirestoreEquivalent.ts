@@ -5,9 +5,13 @@ export interface FirestoreEquivalent {
 }
 
 export namespace FirestoreEquivalent {
-    export interface CollectionReferenceEquivalent {
-        doc(name: string): DocumentReferenceEquivalent;
+    export interface Query {
+        orderBy(fieldName: string, direction?: "desc" | "asc"): Query;
         get(): Promise<QuerySnapshot>;
+    }
+
+    export interface CollectionReferenceEquivalent extends Query {
+        doc(name: string): DocumentReferenceEquivalent;
     }
 
     export interface QuerySnapshot {
