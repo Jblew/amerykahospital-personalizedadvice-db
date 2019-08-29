@@ -1,26 +1,15 @@
 /* tslint:disable:max-classes-per-file no-console */
 import * as firebase from "@firebase/testing";
-import { expect, use as chaiUse } from "chai";
-import chaiAsPromised from "chai-as-promised";
-import * as _ from "lodash";
-import "mocha";
-import uuid from "uuid/v4";
 
-import { Advice, FirestoreCollectionKeys } from "./context";
-import { mock, sampleAdvice } from "./mock.test";
+import { Advice, FirestoreCollectionKeys } from "../context";
 
-chaiUse(chaiAsPromised);
+import { _, expect, uuid } from "./_testenv/test_environment";
+import { cleanupFirebase, mock, sampleAdvice } from "./mock.test";
 
 describe("Firestore rules", function() {
-    this.timeout(4000);
+    this.timeout(6000);
 
-    afterEach(async () => {
-        try {
-            await Promise.all(firebase.apps().map(app => app.delete()));
-        } catch (error) {
-            console.warn("Warning: Error in firebase shutdown " + error);
-        }
-    });
+    afterEach(async () => await cleanupFirebase());
 
     describe("Collection " + FirestoreCollectionKeys.ADVICES_COLLECTION_KEY, () => {
         const collName = FirestoreCollectionKeys.ADVICES_COLLECTION_KEY;

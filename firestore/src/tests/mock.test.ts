@@ -1,10 +1,11 @@
+// tslint:disable no-console
 import * as firebase from "@firebase/testing";
 import FirestoreRoles from "firestore-roles";
 import * as fs from "fs";
 import * as path from "path";
 import uuid from "uuid/v4";
 
-import { Advice, RoleKey, RolesConfig } from "./context";
+import { Advice, RoleKey, RolesConfig } from "../context";
 
 const firestoreRules = fs.readFileSync(path.resolve(__dirname, "../deploy.firestore.rules"), "utf8");
 
@@ -48,6 +49,16 @@ export async function mock(o: { clientAuth?: {} }) {
         clientDoc,
         markAsMedicalProfessional,
     };
+}
+
+export async function cleanupFirebase() {
+    {
+        try {
+            await Promise.all(firebase.apps().map(app => app.delete()));
+        } catch (error) {
+            console.warn("Warning: Error in firebase shutdown " + error);
+        }
+    }
 }
 
 export function sampleAdvice(uid?: string) {
