@@ -1,10 +1,8 @@
 /* tslint:disable:max-classes-per-file no-console */
-import * as firebase from "@firebase/testing";
-
-import { Advice, FirestoreCollectionKeys, RoleKey } from "../context";
+import { FirestoreCollectionKeys, RoleKey } from "../context";
 
 import { _, expect, uuid } from "./_testenv/test_environment";
-import { cleanupFirebase, mock, sampleAdvice, sampleMedicalProfessional } from "./mock.test";
+import { cleanupFirebase, mock, sampleMedicalProfessional } from "./mock.test";
 
 describe("Firestore rules", function() {
     this.timeout(6000);

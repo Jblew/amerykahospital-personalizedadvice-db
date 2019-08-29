@@ -5,9 +5,9 @@ import * as fs from "fs";
 import * as path from "path";
 import uuid from "uuid/v4";
 
-import { Advice, RoleKey, RolesConfig, PendingMedicalProfessional } from "../context";
+import { Advice, PendingMedicalProfessional, RolesConfig } from "../context";
 
-const firestoreRules = fs.readFileSync(path.resolve(__dirname, "../deploy.firestore.rules"), "utf8");
+const firestoreRules = fs.readFileSync(path.resolve(__dirname, "../../deploy.firestore.rules"), "utf8");
 
 export async function mock(o: { clientAuth?: {} }) {
     const projectId = "unit-testing-" + Date.now();
