@@ -26,7 +26,7 @@
         "bluebird": "^3.5.5",
         "chai": "4.2.0",
         "chai-as-promised": "7.1.1",
-        "firestore-roles": "^2.2.0",
+        "firestore-roles": "^2.3.2",
         "husky": "^3.0.3",
         "jblew-tslint-config": "0.1.0",
         "lodash": "^4.17.15",
