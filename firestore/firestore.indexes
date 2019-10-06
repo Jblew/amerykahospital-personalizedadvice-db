@@ -17,6 +17,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "authorUid",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "timestamp",
           "order": "DESCENDING"
         }
@@ -45,6 +49,10 @@
           "order": "DESCENDING"
         },
         {
+          "fieldPath": "authorUid",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "timestamp",
           "order": "DESCENDING"
         }
@@ -59,6 +67,10 @@
           "order": "DESCENDING"
         },
         {
+          "fieldPath": "authorUid",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "timestamp",
           "order": "DESCENDING"
         }
@@ -70,6 +82,52 @@
       "fields": [
         {
           "fieldPath": "uid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ahpaa_advices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "authorUid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ahpaa_advices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "evidenceHash",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ahpaa_advices",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "evidenceHash",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "authorUid",
           "order": "ASCENDING"
         },
         {
