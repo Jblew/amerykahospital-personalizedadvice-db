@@ -59,7 +59,7 @@ export class AdviceRepositoryImpl implements AdviceRepository {
 
         query = query.orderBy(Advice.keys.timestamp, "desc");
 
-        query = query.limit(20);
+        query = query.limit(50);
 
         const querySnapshot = await query.get();
 
