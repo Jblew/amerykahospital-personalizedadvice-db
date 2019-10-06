@@ -41,6 +41,14 @@ export class AdviceRepositoryImpl implements AdviceRepository {
             );
         }
 
+        if (filter.authorUid) {
+            query = query.where(Advice.keys.authorUid, "==", filter.authorUid);
+        }
+
+        if (filter.evidenceHash) {
+            query = query.where(Advice.keys.evidenceHash, "==", filter.evidenceHash);
+        }
+
         if (filter.patientName) {
             query = this.createStartsWithQueryClause(query, Advice.keys.patientName, filter.patientName);
         }

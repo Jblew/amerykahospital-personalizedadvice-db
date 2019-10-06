@@ -21,7 +21,7 @@
         "semantic-release": "semantic-release"
     },
     "dependencies": {
-        "amerykahospital-personalizedadvice-businesslogic": "^5.1.0",
+        "amerykahospital-personalizedadvice-businesslogic": "^5.4.1",
         "firebase": "^6.3.5",
         "firestore-roles": "^2.2.0",
         "lodash": "^4.17.15",
